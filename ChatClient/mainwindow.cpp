@@ -13,14 +13,26 @@ MainWindow::MainWindow(QWidget *parent)
     , userlist_model(new QStandardItemModel(this)) {
 
     ui->setupUi(this);
-    ui->stackedWidget->setCurrentIndex(0);
+    ui->stackedWidget->setCurrentWidget(ui->StartPage);
     client->ConnectToServer("127.0.0.1", 60000);
 
     chat_model->insertColumn(0);
+    chat_model->insertColumn(1);
     ui->chatView->setModel(chat_model);
+    ui->chatView->setShowGrid(false);
+    ui->chatView->verticalHeader()->setVisible(false);
+    ui->chatView->horizontalHeader()->setVisible(false);
 
     userlist_model->insertColumn(0);
     ui->usersView->setModel(userlist_model);
+    ui->usersView->setSelectionMode(QAbstractItemView::NoSelection);
+    ui->chatView->setSelectionMode(QAbstractItemView::NoSelection);
+    ui->chatView->setColumnWidth(1, 500);
+
+    ui->PasswordEdit->setEchoMode(QLineEdit::Password);
+    ui->PassConfEdit->setEchoMode(QLineEdit::Password);
+    ui->PasswordEdit_2->setEchoMode(QLineEdit::Password);
+    ui->PasswordEdit_3->setEchoMode(QLineEdit::Password);
 
     connect(this, &MainWindow::LoginSignal, client, &Client::Login);
     connect(client, &Client::FailedToConnect, this, &MainWindow::FailedToConnect);
@@ -61,7 +73,7 @@ void MainWindow::LoggedIn() {
 
 void MainWindow::LoginFailed(const QString &reason) {
     QMessageBox::critical(this, "Login error", reason);
-    ui->nicknameEdit->clear();
+   // ui->nicknameEdit->clear();
 
 }
 
@@ -70,9 +82,13 @@ void MainWindow::MessageReceived(const QString &sender, const QString &message) 
     qDebug() << "Inside window message received!";
     int new_row = chat_model->rowCount();
     chat_model->insertRow(new_row);
-    chat_model->setData(chat_model->index(new_row, 0), sender + QString(": ") + message);
+
+    chat_model->setData(chat_model->index(new_row, 0), sender + QString(": "));
     chat_model->setData(chat_model->index(new_row, 0), int(Qt::AlignLeft | Qt::AlignVCenter),
                         Qt::TextAlignmentRole);
+    chat_model->setData(chat_model->index(new_row, 1), message);
+    chat_model->item(new_row, 0)->setFont(QFont("Ubuntu", 15, QFont::Bold));
+    chat_model->item(new_row, 1)->setFont(QFont("Ubuntu", 15));
     ui->chatView->scrollToBottom();
 
 
@@ -87,9 +103,9 @@ void MainWindow::SendMessage() {
 void MainWindow::UserJoined(const QString &username) {
     const int chatRow = chat_model->rowCount();
     chat_model->insertRow(chatRow);
-    chat_model->setData(chat_model->index(chatRow, 0), tr("%1 joined chat").arg(username));
-    chat_model->setData(chat_model->index(chatRow, 0), Qt::AlignCenter, Qt::TextAlignmentRole);
-    chat_model->setData(chat_model->index(chatRow, 0), QBrush(Qt::blue), Qt::ForegroundRole);
+    chat_model->setData(chat_model->index(chatRow, 1), tr("%1 joined chat").arg(username));
+    chat_model->setData(chat_model->index(chatRow, 1), Qt::AlignCenter, Qt::TextAlignmentRole);
+    chat_model->item(chatRow, 1)->setFont(QFont("Ubuntu", 15, QFont::Bold));
     ui->chatView->scrollToBottom();
 
     const int usersRow = userlist_model->rowCount();
@@ -107,9 +123,9 @@ void MainWindow::UserDeleted(const QString &username)
     }
     const int chatRow = chat_model->rowCount();
     chat_model->insertRow(chatRow);
-    chat_model->setData(chat_model->index(chatRow, 0), tr("%1 deleted from chat").arg(username));
-    chat_model->setData(chat_model->index(chatRow, 0), Qt::AlignCenter, Qt::TextAlignmentRole);
-    chat_model->setData(chat_model->index(chatRow, 0), QBrush(Qt::blue), Qt::ForegroundRole);
+    chat_model->setData(chat_model->index(chatRow, 1), tr("%1 deleted from chat").arg(username));
+    chat_model->setData(chat_model->index(chatRow, 1), Qt::AlignCenter, Qt::TextAlignmentRole);
+    chat_model->item(chatRow, 1)->setFont(QFont("Ubuntu", 15, QFont::Bold));
     ui->chatView->scrollToBottom();
 }
 
@@ -128,9 +144,9 @@ void MainWindow::UserLeft(const QString &username) {
     }
     const int chatRow = chat_model->rowCount();
     chat_model->insertRow(chatRow);
-    chat_model->setData(chat_model->index(chatRow, 0), tr("%1 left chat").arg(username));
-    chat_model->setData(chat_model->index(chatRow, 0), Qt::AlignCenter, Qt::TextAlignmentRole);
-    chat_model->setData(chat_model->index(chatRow, 0), QBrush(Qt::blue), Qt::ForegroundRole);
+    chat_model->setData(chat_model->index(chatRow, 1), tr("%1 left chat").arg(username));
+    chat_model->setData(chat_model->index(chatRow, 1), Qt::AlignCenter, Qt::TextAlignmentRole);
+    chat_model->item(chatRow, 1)->setFont(QFont("Ubuntu", 15, QFont::Bold));
     ui->chatView->scrollToBottom();
 
 }
@@ -141,29 +157,43 @@ void MainWindow::FailedToConnect() {
 }
 
 
-void MainWindow::on_loginButton_clicked() {
-    if (ui->nicknameEdit->text().isEmpty()) {
-        QMessageBox::critical(this, "Login error", "Enter username!");
-        return;
-    }
-    emit LoginSignal(ui->nicknameEdit->text());
-    ui->nicknameEdit->clear();
-}
-
-
 void MainWindow::on_messageEdit_returnPressed()
 {
     SendMessage();
 }
 
 
-void MainWindow::on_nicknameEdit_returnPressed()
+void MainWindow::on_logButton_clicked()
 {
-    if (ui->nicknameEdit->text().isEmpty()) {
-        QMessageBox::critical(this, "Login error", "Enter username!");
-        return;
-    }
-    emit LoginSignal(ui->nicknameEdit->text());
-    ui->nicknameEdit->clear();
+    ui->stackedWidget->setCurrentWidget(ui->LogPage);
+}
+
+
+void MainWindow::on_changeNicknameButton_clicked()
+{
+    ui->stackedWidget->setCurrentWidget(ui->ChangeNicknamePage);
+}
+
+
+void MainWindow::on_regButton_clicked()
+{
+    ui->stackedWidget->setCurrentWidget(ui->RegPage);
+}
+
+
+void MainWindow::on_returnButton_3_clicked()
+{
+    ui->stackedWidget->setCurrentWidget(ui->StartPage);
+}
+
+
+void MainWindow::on_returnButton_2_clicked()
+{
+    ui->stackedWidget->setCurrentWidget(ui->StartPage);
+}
+
+void MainWindow::on_returnButton_clicked()
+{
+    ui->stackedWidget->setCurrentWidget(ui->StartPage);
 }
 

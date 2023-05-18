@@ -43,11 +43,19 @@ private slots:
     void FailedToConnect();
 
 
-    void on_loginButton_clicked();
+    void on_logButton_clicked();
+
+    void on_changeNicknameButton_clicked();
 
     void on_messageEdit_returnPressed();
 
-    void on_nicknameEdit_returnPressed();
+    void on_regButton_clicked();
+
+    void on_returnButton_3_clicked();
+
+    void on_returnButton_2_clicked();
+
+    void on_returnButton_clicked();
 
 private:
     Ui::MainWindow *ui;

@@ -6,9 +6,27 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>918</width>
-    <height>750</height>
+    <width>1100</width>
+    <height>600</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>1100</width>
+    <height>600</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>1100</width>
+    <height>800</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
@@ -19,15 +37,33 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgb
 }</string>
   </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>1100</width>
+     <height>800</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>1100</width>
+     <height>800</height>
+    </size>
+   </property>
    <property name="styleSheet">
     <string notr="true">#centralwidget {
-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(0, 149, 78, 255), stop:1 rgba(16, 124, 135, 255));
+	background-color: rgb(0, 125, 129);
 }</string>
    </property>
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>730</x>
+      <x>780</x>
       <y>30</y>
       <width>150</width>
       <height>23</height>
@@ -50,44 +86,27 @@ font: 700 15pt &quot;Ubuntu Condensed&quot;;</string>
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QPushButton" name="deleteButton">
-    <property name="geometry">
-     <rect>
-      <x>729</x>
-      <y>670</y>
-      <width>151</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="maximumSize">
-     <size>
-      <width>200</width>
-      <height>16777215</height>
-     </size>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgb(91, 185, 112);
-font: 700 15pt &quot;Ubuntu Condensed&quot;;</string>
-    </property>
-    <property name="text">
-     <string>Delete</string>
-    </property>
-   </widget>
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>70</x>
-      <y>70</y>
-      <width>811</width>
-      <height>591</height>
+      <x>30</x>
+      <y>60</y>
+      <width>901</width>
+      <height>501</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
       <widget class="QTextBrowser" name="messagesBrowser">
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(204, 255, 215);
-font: 14pt &quot;Ubuntu&quot;;</string>
+        <string notr="true">background-color: rgb(61, 56, 70);
+border-color: rgb(190, 253, 255);
+color: rgb(255, 255, 255);
+font: 15pt &quot;Ubuntu bold&quot;;
+border-style: outset;
+border-width: 1px;
+border-radius: 10px;
+</string>
        </property>
       </widget>
      </item>
@@ -106,8 +125,72 @@ font: 14pt &quot;Ubuntu&quot;;</string>
         </size>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(204, 255, 215);
-font: 12pt &quot;Ubuntu&quot;;</string>
+        <string notr="true">background-color: rgb(61, 56, 70);
+border-color: rgb(190, 253, 255);
+color: rgb(255, 255, 255);
+font: 15pt &quot;Ubuntu bold&quot;;
+border-style: outset;
+border-width: 1px;
+border-radius: 10px;
+</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>950</x>
+      <y>60</y>
+      <width>131</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QPushButton" name="deleteButton">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>200</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(39, 79, 81);
+border-color: rgb(190, 253, 255);
+font: 700 12pt &quot;Ubuntu&quot;;
+border-style: outset;
+border-width: 1px;
+border-radius: 10px;
+min-height: 1.6em;
+color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string>Disconnect user</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(39, 79, 81);
+border-color: rgb(190, 253, 255);
+font: 700 12pt &quot;Ubuntu&quot;;
+border-style: outset;
+border-width: 1px;
+border-radius: 10px;
+min-height: 1.6em;
+color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string>Ban user</string>
        </property>
       </widget>
      </item>
