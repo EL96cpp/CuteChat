@@ -10,7 +10,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets Network)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Network)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Network Sql)
 
 set(PROJECT_SOURCES
         main.cpp
@@ -21,6 +21,10 @@ set(PROJECT_SOURCES
         clientconnection.h
         server.cpp
         server.h
+        sql_service.cpp
+        sql_service.h
+        mail_service.cpp
+        mail_service.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
@@ -46,7 +50,10 @@ else()
     endif()
 endif()
 
-target_link_libraries(ChatServer PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Network)
+find_package(Poco REQUIRED Net NetSSL)
+
+target_link_libraries(ChatServer PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Network Qt${QT_VERSION_MAJOR}::Sql
+                        Poco::Net Poco::NetSSL)
 
 set_target_properties(ChatServer PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com

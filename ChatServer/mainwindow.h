@@ -24,6 +24,7 @@ private:
     Ui::MainWindow *ui;
     Server* server;
     QStandardItemModel* userlist_model;
+    QStandardItemModel* banned_model;
 
 signals:
     void DisconnectUser(const QString& username);
@@ -32,6 +33,7 @@ private slots:
     void LogMessage(const QString& message);
     void OnUserLeft(const QString& username);
     void OnUserLoggedIn(const QString& username);
+    void OnUnbanUser(const QString& username);
 
     void on_deleteButton_clicked();
 };

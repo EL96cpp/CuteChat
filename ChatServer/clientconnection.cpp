@@ -10,7 +10,7 @@
 ClientConnection::ClientConnection() : socket(new QTcpSocket) {
 
     connect(socket, &QTcpSocket::readyRead, this, &ClientConnection::ReceiveMessage);
-
+    connect(socket, &QTcpSocket::disconnected, socket, &QTcpSocket::deleteLater);
 }
 
 

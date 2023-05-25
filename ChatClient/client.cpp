@@ -88,28 +88,38 @@ void Client::jsonReceived(const QJsonObject &json) {
     qDebug() << "json received";
     const QJsonValue type_value = json.value(QLatin1String("type"));
     if (type_value.isNull() || !type_value.isString()) {
+
         qDebug() << "log1";
         return;
+
     }
     if (type_value.toString().compare(QLatin1String("login"), Qt::CaseInsensitive) == 0) {
         if (bLoggedIn) {
+
             qDebug() << "log2";
             return;
+
         }
-        const QJsonValue result_value = json.value(QLatin1String("success"));
+        const QJsonValue result_value = json.value(QLatin1String("success"));   
         if (result_value.isNull() || !result_value.isBool()) {
+
             qDebug() << "log3";
             return;
+
         }
         const bool login_success = result_value.toBool();
         if (login_success) {
+
             qDebug() << "logged in!";
             emit LoggedIn();
             return;
+
         }
         const QJsonValue reason_value = json.value(QLatin1String("reason"));
         emit LoginError(reason_value.toString());
+
     } else if (type_value.toString().compare(QLatin1String("userlist"), Qt::CaseInsensitive) == 0) {
+
         const QJsonValue userlist = json.value(QLatin1String("userlist"));
         QJsonArray userlist_array = userlist.toArray();
         for (const auto& username : userlist_array) {
@@ -117,38 +127,63 @@ void Client::jsonReceived(const QJsonObject &json) {
         }
         qDebug() << "userlist";
 
+    } else if (type_value.toString().compare(QLatin1String("message history"), Qt::CaseInsensitive) == 0) {
+
+        const QJsonValue message_history = json.value(QLatin1String("message history"));
+        QJsonArray history_array = message_history.toArray();
+        for (const QJsonValue& message : history_array) {
+            QJsonObject message_obj = message.toObject();
+            QJsonValue sender_value = message_obj.value(QLatin1String("text"));
+            QJsonValue text_value = message_obj.value(QLatin1String("text"));
+            emit MessageReceived(sender_value.toString(), text_value.toString());
+        }
+
     } else if (type_value.toString().compare(QLatin1String("message"), Qt::CaseInsensitive) == 0) {
+
         const QJsonValue text_value = json.value(QLatin1String("text"));
         const QJsonValue sender_value = json.value(QLatin1String("sender"));
         if (text_value.isNull() || !text_value.isString()) {
+
             return;
+
         }
         if (sender_value.isNull() || !sender_value.isString()) {
+
             return;
+
         }
         qDebug() << "Message received!";
         emit MessageReceived(sender_value.toString(), text_value.toString());
+
     } else if (type_value.toString().compare(QLatin1String("newuser"), Qt::CaseInsensitive) == 0) {
+
         const QJsonValue username_value = json.value(QLatin1String("username"));
         if (username_value.isNull() || !username_value.isString()) {
             return;
         }
         emit UserJoined(username_value.toString());
+
     } else if (type_value.toString().compare(QLatin1String("user left"), Qt::CaseInsensitive) == 0) {
+
         const QJsonValue username_value = json.value(QLatin1String("username"));
         if (username_value.isNull() || !username_value.isString()) {
             return;
         }
         emit UserLeft(username_value.toString());
+
     } else if (type_value.toString().compare(QLatin1String("user deleted"), Qt::CaseInsensitive) == 0) {
+
         const QJsonValue username_value = json.value(QLatin1String("username"));
         if (username_value.isNull() || !username_value.isString()) {
             return;
         }
         emit UserDeleted(username_value.toString());
+
     } else if (type_value.toString().compare(QLatin1String("this user deleted"), Qt::CaseInsensitive) == 0) {
+
         qDebug() << "Deleted from server";
         emit GotDeleted();
+
     }
 
 }

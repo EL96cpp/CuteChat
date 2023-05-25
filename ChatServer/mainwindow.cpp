@@ -48,6 +48,11 @@ void MainWindow::OnUserLoggedIn(const QString& username)
     ui->userlistView->scrollToBottom();
 }
 
+void MainWindow::OnUnbanUser(const QString &username)
+{
+
+}
+
 
 void MainWindow::on_deleteButton_clicked()
 {

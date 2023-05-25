@@ -77,7 +77,7 @@
 }</string>
     </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="StartPage">
      <property name="styleSheet">
@@ -85,7 +85,7 @@
 	background-color: rgb(0, 125, 129);
 }</string>
      </property>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>250</x>
@@ -96,7 +96,7 @@
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
-        <widget class="QLabel" name="label_2">
+        <widget class="QLabel" name="StartLabel">
          <property name="styleSheet">
           <string notr="true">color: rgb(255, 255, 255);
 font: 700 50pt &quot;Ubuntu Condensed&quot;;
@@ -117,7 +117,7 @@ border-radius: 20px;</string>
        <item>
         <layout class="QVBoxLayout" name="verticalLayout">
          <item>
-          <widget class="QPushButton" name="logButton">
+          <widget class="QPushButton" name="StartLogButton">
            <property name="styleSheet">
             <string notr="true">background-color: rgb(39, 79, 81);
 border-color: rgb(190, 253, 255);
@@ -135,7 +135,25 @@ color: rgb(255, 255, 255);</string>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="changeNicknameButton">
+          <widget class="QPushButton" name="StartRegButton">
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(39, 79, 81);
+border-color: rgb(190, 253, 255);
+font: 700 15pt &quot;Ubuntu&quot;;
+border-style: outset;
+border-width: 2px;
+border-radius: 10px;
+min-width: 10em;
+min-height: 2em;
+color: rgb(255, 255, 255);</string>
+           </property>
+           <property name="text">
+            <string>Registration</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="StartChangeNicknameButton">
            <property name="styleSheet">
             <string notr="true">background-color: rgb(39, 79, 81);
 border-color: rgb(190, 253, 255);
@@ -153,7 +171,7 @@ color: rgb(255, 255, 255);</string>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="regButton">
+          <widget class="QPushButton" name="StartChangePasswordButton">
            <property name="styleSheet">
             <string notr="true">background-color: rgb(39, 79, 81);
 border-color: rgb(190, 253, 255);
@@ -166,7 +184,7 @@ min-height: 2em;
 color: rgb(255, 255, 255);</string>
            </property>
            <property name="text">
-            <string>Registration</string>
+            <string>Change password</string>
            </property>
           </widget>
          </item>
@@ -175,24 +193,22 @@ color: rgb(255, 255, 255);</string>
       </layout>
      </widget>
     </widget>
-    <widget class="QWidget" name="ChangeNicknamePage">
+    <widget class="QWidget" name="ChangePasswordPage">
      <property name="styleSheet">
-      <string notr="true">#ChangeNicknamePage {
-	background-color: rgb(0, 125, 129);
-}</string>
+      <string notr="true">background-color: rgb(0, 125, 129);</string>
      </property>
-     <widget class="QWidget" name="layoutWidget_4">
+     <widget class="QWidget" name="layoutWidget_6">
       <property name="geometry">
        <rect>
-        <x>150</x>
-        <y>110</y>
-        <width>781</width>
+        <x>80</x>
+        <y>130</y>
+        <width>811</width>
         <height>261</height>
        </rect>
       </property>
-      <layout class="QGridLayout" name="gridLayout_4">
+      <layout class="QGridLayout" name="gridLayout_5">
        <item row="1" column="1">
-        <widget class="QLineEdit" name="MailEdit_3">
+        <widget class="QLineEdit" name="ChangePasswordMailEdit">
          <property name="styleSheet">
           <string notr="true">background-color: rgb(61, 56, 70);
 border-color: rgb(190, 253, 255);
@@ -206,18 +222,21 @@ border-radius: 10px;
         </widget>
        </item>
        <item row="3" column="0">
-        <widget class="QLabel" name="PassConf_label_2">
+        <widget class="QLabel" name="ChangePasswordNewPassLabel">
          <property name="styleSheet">
           <string notr="true">color: rgb(255, 255, 255);
 font: 20pt &quot;Ubuntu&quot;;</string>
          </property>
          <property name="text">
-          <string>Confirm password:</string>
+          <string>New password:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
          </property>
         </widget>
        </item>
        <item row="2" column="1">
-        <widget class="QLineEdit" name="PasswordEdit_3">
+        <widget class="QLineEdit" name="ChangePasswordOldPassEdit">
          <property name="styleSheet">
           <string notr="true">background-color: rgb(61, 56, 70);
 border-color: rgb(190, 253, 255);
@@ -231,7 +250,7 @@ border-radius: 10px;
         </widget>
        </item>
        <item row="3" column="1">
-        <widget class="QLineEdit" name="PassConfEdit_2">
+        <widget class="QLineEdit" name="ChangePasswordNewPassEdit">
          <property name="styleSheet">
           <string notr="true">background-color: rgb(61, 56, 70);
 border-color: rgb(190, 253, 255);
@@ -244,13 +263,13 @@ border-radius: 10px;</string>
         </widget>
        </item>
        <item row="2" column="0">
-        <widget class="QLabel" name="Password_label_3">
+        <widget class="QLabel" name="ChangePasswordPassLabel">
          <property name="styleSheet">
           <string notr="true">color: rgb(255, 255, 255);
 font: 20pt &quot;Ubuntu&quot;;</string>
          </property>
          <property name="text">
-          <string>Password:</string>
+          <string>Old Password:</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -258,7 +277,7 @@ font: 20pt &quot;Ubuntu&quot;;</string>
         </widget>
        </item>
        <item row="1" column="0">
-        <widget class="QLabel" name="Mail_label_3">
+        <widget class="QLabel" name="ChangePasswordMailLabel">
          <property name="styleSheet">
           <string notr="true">color: rgb(255, 255, 255);
 font: 20pt &quot;Ubuntu&quot;;</string>
@@ -272,7 +291,7 @@ font: 20pt &quot;Ubuntu&quot;;</string>
         </widget>
        </item>
        <item row="4" column="1">
-        <widget class="QLineEdit" name="NicknameEdit_2">
+        <widget class="QLineEdit" name="ChangePasswordConfNewPassEdit">
          <property name="styleSheet">
           <string notr="true">background-color: rgb(61, 56, 70);
 border-color: rgb(190, 253, 255);
@@ -286,7 +305,102 @@ border-radius: 10px;
         </widget>
        </item>
        <item row="4" column="0">
-        <widget class="QLabel" name="Nickname_label_2">
+        <widget class="QLabel" name="ChangePasswordConfPassLabel">
+         <property name="styleSheet">
+          <string notr="true">color: rgb(255, 255, 255);
+font: 20pt &quot;Ubuntu&quot;;</string>
+         </property>
+         <property name="text">
+          <string>Confirm new password:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="">
+      <property name="geometry">
+       <rect>
+        <x>700</x>
+        <y>420</y>
+        <width>191</width>
+        <height>81</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <widget class="QPushButton" name="ChangePasswordChangeButton">
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(39, 79, 81);
+border-color: rgb(190, 253, 255);
+font: 700 12pt &quot;Ubuntu&quot;;
+border-style: outset;
+border-width: 1px;
+border-radius: 10px;
+min-width: 10em;
+min-height: 1.6em;
+color: rgb(255, 255, 255);</string>
+         </property>
+         <property name="text">
+          <string>Change password</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="ChangePasswordReturnButton">
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(39, 79, 81);
+border-color: rgb(190, 253, 255);
+font: 700 12pt &quot;Ubuntu&quot;;
+border-style: outset;
+border-width: 1px;
+border-radius: 10px;
+min-width: 10em;
+min-height: 1.6em;
+color: rgb(255, 255, 255);</string>
+         </property>
+         <property name="text">
+          <string>Return</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="ChangeNicknamePage">
+     <property name="styleSheet">
+      <string notr="true">#ChangeNicknamePage {
+	background-color: rgb(0, 125, 129);
+}</string>
+     </property>
+     <widget class="QWidget" name="layoutWidget_4">
+      <property name="geometry">
+       <rect>
+        <x>130</x>
+        <y>100</y>
+        <width>781</width>
+        <height>301</height>
+       </rect>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_4">
+       <item row="2" column="1">
+        <widget class="QLineEdit" name="ChangeNicknamePasswordEdit">
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(61, 56, 70);
+border-color: rgb(190, 253, 255);
+color: rgb(255, 255, 255);
+font: 15pt &quot;Ubuntu bold&quot;;
+border-style: outset;
+border-width: 1px;
+border-radius: 10px;
+</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="ChangeNicknameNicknameLabel">
          <property name="styleSheet">
           <string notr="true">color: rgb(255, 255, 255);
 font: 20pt &quot;Ubuntu&quot;;</string>
@@ -299,20 +413,76 @@ font: 20pt &quot;Ubuntu&quot;;</string>
          </property>
         </widget>
        </item>
+       <item row="1" column="1">
+        <widget class="QLineEdit" name="ChangeNicknameMailEdit">
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(61, 56, 70);
+border-color: rgb(190, 253, 255);
+color: rgb(255, 255, 255);
+font: 15pt &quot;Ubuntu bold&quot;;
+border-style: outset;
+border-width: 1px;
+border-radius: 10px;
+</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QLineEdit" name="ChangeNicknameNicknameEdit">
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(61, 56, 70);
+border-color: rgb(190, 253, 255);
+color: rgb(255, 255, 255);
+font: 15pt &quot;Ubuntu bold&quot;;
+border-style: outset;
+border-width: 1px;
+border-radius: 10px;
+</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="ChangeNicknamePasswordLabel">
+         <property name="styleSheet">
+          <string notr="true">color: rgb(255, 255, 255);
+font: 20pt &quot;Ubuntu&quot;;</string>
+         </property>
+         <property name="text">
+          <string>Password:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="ChangeNicknameMailLabel">
+         <property name="styleSheet">
+          <string notr="true">color: rgb(255, 255, 255);
+font: 20pt &quot;Ubuntu&quot;;</string>
+         </property>
+         <property name="text">
+          <string>Mail:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
       </layout>
      </widget>
      <widget class="QWidget" name="layoutWidget_5">
       <property name="geometry">
        <rect>
-        <x>680</x>
-        <y>380</y>
+        <x>660</x>
+        <y>420</y>
         <width>251</width>
         <height>101</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_10">
        <item>
-        <widget class="QPushButton" name="logButton_3">
+        <widget class="QPushButton" name="ChangeNicknameChangeButton">
          <property name="styleSheet">
           <string notr="true">background-color: rgb(39, 79, 81);
 border-color: rgb(190, 253, 255);
@@ -330,7 +500,7 @@ color: rgb(255, 255, 255);</string>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="returnButton_3">
+        <widget class="QPushButton" name="ChangeNicknameReturnButton">
          <property name="styleSheet">
           <string notr="true">background-color: rgb(39, 79, 81);
 border-color: rgb(190, 253, 255);
@@ -367,7 +537,7 @@ color: rgb(255, 255, 255);</string>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_9">
        <item>
-        <widget class="QPushButton" name="logButton_2">
+        <widget class="QPushButton" name="LogLogButton">
          <property name="styleSheet">
           <string notr="true">background-color: rgb(39, 79, 81);
 border-color: rgb(190, 253, 255);
@@ -385,7 +555,7 @@ color: rgb(255, 255, 255);</string>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="returnButton_2">
+        <widget class="QPushButton" name="LogReturnButton">
          <property name="styleSheet">
           <string notr="true">background-color: rgb(39, 79, 81);
 border-color: rgb(190, 253, 255);
@@ -415,7 +585,7 @@ color: rgb(255, 255, 255);</string>
       </property>
       <layout class="QGridLayout" name="gridLayout_3">
        <item row="0" column="1">
-        <widget class="QLineEdit" name="MailEdit_2">
+        <widget class="QLineEdit" name="LogMailEdit">
          <property name="styleSheet">
           <string notr="true">background-color: rgb(61, 56, 70);
 border-color: rgb(190, 253, 255);
@@ -429,7 +599,7 @@ border-radius: 10px;
         </widget>
        </item>
        <item row="1" column="1">
-        <widget class="QLineEdit" name="PasswordEdit_2">
+        <widget class="QLineEdit" name="LogPasswordEdit">
          <property name="styleSheet">
           <string notr="true">background-color: rgb(61, 56, 70);
 border-color: rgb(190, 253, 255);
@@ -443,7 +613,7 @@ border-radius: 10px;
         </widget>
        </item>
        <item row="1" column="0">
-        <widget class="QLabel" name="Password_label_2">
+        <widget class="QLabel" name="LogPasswordLabel">
          <property name="styleSheet">
           <string notr="true">color: rgb(255, 255, 255);
 font: 20pt &quot;Ubuntu&quot;;</string>
@@ -457,7 +627,7 @@ font: 20pt &quot;Ubuntu&quot;;</string>
         </widget>
        </item>
        <item row="0" column="0">
-        <widget class="QLabel" name="Mail_label_2">
+        <widget class="QLabel" name="LogMailLabel">
          <property name="styleSheet">
           <string notr="true">color: rgb(255, 255, 255);
 font: 20pt &quot;Ubuntu&quot;;</string>
@@ -479,7 +649,7 @@ font: 20pt &quot;Ubuntu&quot;;</string>
 	background-color: rgb(0, 125, 129);
 }</string>
      </property>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>680</x>
@@ -490,7 +660,7 @@ font: 20pt &quot;Ubuntu&quot;;</string>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_8">
        <item>
-        <widget class="QPushButton" name="regButton_2">
+        <widget class="QPushButton" name="RegRegButton">
          <property name="styleSheet">
           <string notr="true">background-color: rgb(39, 79, 81);
 border-color: rgb(190, 253, 255);
@@ -508,7 +678,7 @@ color: rgb(255, 255, 255);</string>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="returnButton">
+        <widget class="QPushButton" name="RegReturnButton">
          <property name="styleSheet">
           <string notr="true">background-color: rgb(39, 79, 81);
 border-color: rgb(190, 253, 255);
@@ -527,7 +697,7 @@ color: rgb(255, 255, 255);</string>
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>150</x>
@@ -538,7 +708,7 @@ color: rgb(255, 255, 255);</string>
       </property>
       <layout class="QGridLayout" name="gridLayout">
        <item row="0" column="0">
-        <widget class="QLabel" name="Nickname_label">
+        <widget class="QLabel" name="RegNickname_label">
          <property name="styleSheet">
           <string notr="true">color: rgb(255, 255, 255);
 font: 20pt &quot;Ubuntu&quot;;</string>
@@ -552,7 +722,7 @@ font: 20pt &quot;Ubuntu&quot;;</string>
         </widget>
        </item>
        <item row="0" column="1">
-        <widget class="QLineEdit" name="NicknameEdit">
+        <widget class="QLineEdit" name="RegNicknameEdit">
          <property name="styleSheet">
           <string notr="true">background-color: rgb(61, 56, 70);
 border-color: rgb(190, 253, 255);
@@ -566,7 +736,7 @@ border-radius: 10px;
         </widget>
        </item>
        <item row="1" column="0">
-        <widget class="QLabel" name="Mail_label">
+        <widget class="QLabel" name="RegMail_label">
          <property name="styleSheet">
           <string notr="true">color: rgb(255, 255, 255);
 font: 20pt &quot;Ubuntu&quot;;</string>
@@ -580,7 +750,7 @@ font: 20pt &quot;Ubuntu&quot;;</string>
         </widget>
        </item>
        <item row="1" column="1">
-        <widget class="QLineEdit" name="MailEdit">
+        <widget class="QLineEdit" name="RegMailEdit">
          <property name="styleSheet">
           <string notr="true">background-color: rgb(61, 56, 70);
 border-color: rgb(190, 253, 255);
@@ -594,7 +764,7 @@ border-radius: 10px;
         </widget>
        </item>
        <item row="2" column="0">
-        <widget class="QLabel" name="Password_label">
+        <widget class="QLabel" name="RegPassword_label">
          <property name="styleSheet">
           <string notr="true">color: rgb(255, 255, 255);
 font: 20pt &quot;Ubuntu&quot;;</string>
@@ -608,7 +778,7 @@ font: 20pt &quot;Ubuntu&quot;;</string>
         </widget>
        </item>
        <item row="2" column="1">
-        <widget class="QLineEdit" name="PasswordEdit">
+        <widget class="QLineEdit" name="RegPasswordEdit">
          <property name="styleSheet">
           <string notr="true">background-color: rgb(61, 56, 70);
 border-color: rgb(190, 253, 255);
@@ -622,7 +792,7 @@ border-radius: 10px;
         </widget>
        </item>
        <item row="3" column="0">
-        <widget class="QLabel" name="PassConf_label">
+        <widget class="QLabel" name="RegPassConf_label">
          <property name="styleSheet">
           <string notr="true">color: rgb(255, 255, 255);
 font: 20pt &quot;Ubuntu&quot;;</string>
@@ -633,7 +803,7 @@ font: 20pt &quot;Ubuntu&quot;;</string>
         </widget>
        </item>
        <item row="3" column="1">
-        <widget class="QLineEdit" name="PassConfEdit">
+        <widget class="QLineEdit" name="RegPassConfEdit">
          <property name="styleSheet">
           <string notr="true">background-color: rgb(61, 56, 70);
 border-color: rgb(190, 253, 255);
@@ -687,7 +857,7 @@ min-width: 10em;</string>
        <set>Qt::AlignCenter</set>
       </property>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>50</x>

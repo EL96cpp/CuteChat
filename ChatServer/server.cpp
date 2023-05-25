@@ -1,10 +1,17 @@
 #include <algorithm>
+#include <memory>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonValue>
 #include <QJsonArray>
 
+
+using namespace std;
+
+
 #include "server.h"
+
+
 
 Server::Server() {
     if (this->listen(QHostAddress::Any, 60000)) {
@@ -12,6 +19,8 @@ Server::Server() {
     } else {
         qDebug() << "Error";
     }
+
+
 }
 
 bool Server::CheckIfUsernameExists(ClientConnection* sender, const QString &username)

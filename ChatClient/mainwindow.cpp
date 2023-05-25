@@ -29,10 +29,13 @@ MainWindow::MainWindow(QWidget *parent)
     ui->chatView->setSelectionMode(QAbstractItemView::NoSelection);
     ui->chatView->setColumnWidth(1, 500);
 
-    ui->PasswordEdit->setEchoMode(QLineEdit::Password);
-    ui->PassConfEdit->setEchoMode(QLineEdit::Password);
-    ui->PasswordEdit_2->setEchoMode(QLineEdit::Password);
-    ui->PasswordEdit_3->setEchoMode(QLineEdit::Password);
+    ui->RegPasswordEdit->setEchoMode(QLineEdit::Password);
+    ui->RegPassConfEdit->setEchoMode(QLineEdit::Password);
+    ui->LogPasswordEdit->setEchoMode(QLineEdit::Password);
+    ui->ChangeNicknamePasswordEdit->setEchoMode(QLineEdit::Password);
+    ui->ChangePasswordOldPassEdit->setEchoMode(QLineEdit::Password);
+    ui->ChangePasswordNewPassEdit->setEchoMode(QLineEdit::Password);
+    ui->ChangePasswordConfNewPassEdit->setEchoMode(QLineEdit::Password);
 
     connect(this, &MainWindow::LoginSignal, client, &Client::Login);
     connect(client, &Client::FailedToConnect, this, &MainWindow::FailedToConnect);
@@ -63,9 +66,6 @@ void MainWindow::GotDeleted()
     qApp->quit();
 }
 
-void MainWindow::AttemptLogin(const QString &username) {
-
-}
 
 void MainWindow::LoggedIn() {
     ui->stackedWidget->setCurrentIndex(1);
@@ -157,43 +157,123 @@ void MainWindow::FailedToConnect() {
 }
 
 
-void MainWindow::on_messageEdit_returnPressed()
+
+void MainWindow::on_ChangePasswordReturnButton_clicked()
 {
-    SendMessage();
+    ui->stackedWidget->setCurrentWidget(ui->StartPage);
 }
 
 
-void MainWindow::on_logButton_clicked()
+void MainWindow::on_ChangePasswordChangeButton_clicked()
+{
+    if (ui->ChangePasswordMailEdit->text().isEmpty() || ui->ChangePasswordOldPassEdit->text().isEmpty() ||
+        ui->ChangePasswordNewPassEdit->text().isEmpty() || ui->ChangePasswordConfNewPassEdit->text().isEmpty()) {
+
+        QMessageBox::critical(this, "Change password error", "Please, fill out all required fields!");
+
+    } else if (ui->ChangePasswordNewPassEdit->text() != ui->ChangePasswordConfNewPassEdit->text()) {
+
+        QMessageBox::critical(this, "Change password error", "New password confirmation differs from new password!");
+
+    } else {
+
+        emit ChangePasswordSignal(ui->ChangePasswordMailEdit->text(),
+                                  ui->ChangePasswordOldPassEdit->text(),
+                                  ui->ChangePasswordNewPassEdit->text());
+
+    }
+}
+
+
+void MainWindow::on_StartChangePasswordButton_clicked()
+{
+    ui->stackedWidget->setCurrentWidget(ui->ChangePasswordPage);
+}
+
+
+void MainWindow::on_StartLogButton_clicked()
 {
     ui->stackedWidget->setCurrentWidget(ui->LogPage);
 }
 
 
-void MainWindow::on_changeNicknameButton_clicked()
+void MainWindow::on_StartChangeNicknameButton_clicked()
 {
     ui->stackedWidget->setCurrentWidget(ui->ChangeNicknamePage);
 }
 
 
-void MainWindow::on_regButton_clicked()
+void MainWindow::on_StartRegButton_clicked()
 {
     ui->stackedWidget->setCurrentWidget(ui->RegPage);
 }
 
 
-void MainWindow::on_returnButton_3_clicked()
+void MainWindow::on_RegRegButton_clicked()
+{
+    if (ui->RegMailEdit->text().isEmpty() || ui->RegNicknameEdit->text().isEmpty() ||
+        ui->RegPasswordEdit->text().isEmpty() || ui->RegPassConfEdit->text().isEmpty()) {
+
+        QMessageBox::critical(this, "Registration error", "Please, fill out all required fields!");
+
+    } else if (ui->RegPasswordEdit->text() != ui->RegPassConfEdit->text()) {
+
+        QMessageBox::critical(this, "Registration error", "Password and password confirmation differs!");
+
+    } else {
+
+        emit RegisterSignal(ui->RegMailEdit->text(), ui->RegPasswordEdit->text(), ui->RegNicknameEdit->text());
+
+    }
+}
+
+
+void MainWindow::on_RegReturnButton_clicked()
 {
     ui->stackedWidget->setCurrentWidget(ui->StartPage);
 }
 
 
-void MainWindow::on_returnButton_2_clicked()
+void MainWindow::on_LogLogButton_clicked()
+{
+    if (ui->LogMailEdit->text().isEmpty() || ui->LogPasswordEdit->text().isEmpty()) {
+        QMessageBox::critical(this, "Login error", "Please, fill out all required fields!");
+    } else {
+        emit LoginSignal(ui->LogMailEdit->text(), ui->LogPasswordEdit->text());
+    }
+}
+
+
+void MainWindow::on_LogReturnButton_clicked()
 {
     ui->stackedWidget->setCurrentWidget(ui->StartPage);
 }
 
-void MainWindow::on_returnButton_clicked()
+
+void MainWindow::on_ChangeNicknameChangeButton_clicked()
+{
+    if (ui->ChangeNicknameMailEdit->text().isEmpty() || ui->ChangeNicknameNicknameEdit->text().isEmpty() ||
+        ui->ChangeNicknamePasswordEdit->text().isEmpty()) {
+        QMessageBox::critical(this, "Change nickname error", "Please, fill out all required fields!");
+    } else {
+        emit ChangeNicknameSignal(ui->ChangeNicknameMailEdit->text(),
+                                  ui->ChangeNicknamePasswordEdit->text(),
+                                  ui->ChangeNicknameNicknameEdit->text());
+    }
+
+}
+
+
+void MainWindow::on_ChangeNicknameReturnButton_clicked()
 {
     ui->stackedWidget->setCurrentWidget(ui->StartPage);
+}
+
+
+void MainWindow::on_messageEdit_returnPressed()
+{
+    if (!ui->messageEdit->text().isEmpty()) {
+        SendMessage();
+    }
 }
 
