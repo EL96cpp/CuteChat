@@ -16,12 +16,26 @@ ClientConnection::ClientConnection() : socket(new QTcpSocket) {
 
 QString ClientConnection::GetUsername()
 {
-    return username;
+    return nickname;
 }
 
-void ClientConnection::SetUsername(const QString &username)
+QString ClientConnection::GetMail()
 {
-    this->username = username;
+    return mail;
+}
+
+void ClientConnection::SetLoginData(const QString& mail, const QString& nickname)
+{
+    this->mail = mail;
+    this->nickname = nickname;
+}
+
+void ClientConnection::SetRegisterData(const QString& mail, const QString& nickname,
+                                       const QString& password, const QString& verification_code) {
+    this->mail = mail;
+    this->nickname = nickname;
+    this->password = password;
+    this->verification_code = verification_code;
 }
 
 void ClientConnection::SetSocketDescriptor(qintptr &socket_descriptor)

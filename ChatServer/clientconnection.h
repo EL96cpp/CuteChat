@@ -11,7 +11,10 @@ public:
     ClientConnection();
 
     QString GetUsername();
-    void SetUsername(const QString& username);
+    QString GetMail();
+    QString GetVerificationCode();
+    void SetLoginData(const QString& mail, const QString& nickname);
+    void SetRegisterData(const QString& mail, const QString& nickname, const QString& password, const QString& verification_code);
     void SetSocketDescriptor(qintptr& socket_descriptor);
     void SendMessage(const QJsonObject& json_data);
 
@@ -24,7 +27,10 @@ public slots:
 
 private:
     QTcpSocket* socket;
-    QString username;
+    QString mail;
+    QString nickname;
+    QString password;
+    QString verification_code;
 };
 
 #endif // CLIENTCONNECTION_H

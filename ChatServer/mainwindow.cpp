@@ -7,18 +7,27 @@ MainWindow::MainWindow(QWidget *parent)
     , server(new Server)
     , userlist_model(new QStandardItemModel(this)) {
     ui->setupUi(this);
+    ui->stackedWidget->setCurrentWidget(ui->LoginPage);
     connect(server, &Server::LogMessage, this, &MainWindow::LogMessage);
     connect(server, &Server::OnUserLoggedIn, this, &MainWindow::OnUserLoggedIn);
     connect(server, &Server::OnUserLeft, this, &MainWindow::OnUserLeft);
+    connect(server, &Server::ServerMailLogged, this, &MainWindow::ServerMailLogged);
+    connect(this, &MainWindow::LoginServerMailSignal, server, &Server::LoginServerMail);
     connect(this, &MainWindow::DisconnectUser, server, &Server::DisconnectUser);
 
     userlist_model->insertColumn(0);
     ui->userlistView->setModel(userlist_model);
+
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::ServerMailLogged()
+{
+    ui->stackedWidget->setCurrentWidget(ui->SqlPage);
 }
 
 void MainWindow::LogMessage(const QString& message)
@@ -69,5 +78,11 @@ void MainWindow::on_deleteButton_clicked()
 
     emit DisconnectUser(username);
 
+}
+
+
+void MainWindow::on_LoginButton_clicked()
+{
+    emit LoginServerMailSignal(ui->gmailEdit->text().toStdString(), ui->passwordEdit->text().toStdString());
 }
 

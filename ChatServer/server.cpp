@@ -4,6 +4,7 @@
 #include <QJsonObject>
 #include <QJsonValue>
 #include <QJsonArray>
+#include <QDebug>
 
 
 using namespace std;
@@ -13,14 +14,14 @@ using namespace std;
 
 
 
-Server::Server() {
+Server::Server() : mail_service(new MailService) {
     if (this->listen(QHostAddress::Any, 60000)) {
         qDebug() << "Server started";
     } else {
         qDebug() << "Error";
     }
 
-
+    connect(mail_service, &MailService::ServerMailLogged, this, &Server::ServerMailLogged);
 }
 
 bool Server::CheckIfUsernameExists(ClientConnection* sender, const QString &username)
@@ -34,6 +35,13 @@ bool Server::CheckIfUsernameExists(ClientConnection* sender, const QString &user
         }
     }
     return false;
+}
+
+void Server::LoginServerMail(const std::string &server_mail, const std::string &server_password)
+{
+    mail_service->TryLogin(server_mail, server_password);
+    qDebug() << QString::fromStdString(server_mail);
+    qDebug() << QString::fromStdString(server_password);
 }
 
 void Server::MessageAll(const QJsonObject &message)
@@ -153,7 +161,7 @@ void Server::MessageFromLoggedOut(ClientConnection *sender, const QJsonObject &j
     }
 
     qDebug() << "New user accepted! Username: " << username;
-    sender->SetUsername(username);
+    //sender->SetUsername(username);
 
     QJsonObject success_message;
     success_message[QStringLiteral("type")] = QStringLiteral("login");

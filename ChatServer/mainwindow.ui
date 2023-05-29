@@ -93,13 +93,13 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgb
 }</string>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="LoginPage">
      <property name="styleSheet">
       <string notr="true">background-color: rgb(0, 125, 129);</string>
      </property>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>870</x>
@@ -110,7 +110,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgb
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
-        <widget class="QPushButton" name="pushButton">
+        <widget class="QPushButton" name="LoginButton">
          <property name="styleSheet">
           <string notr="true">background-color: rgb(39, 79, 81);
 border-color: rgb(190, 253, 255);
@@ -128,7 +128,7 @@ color: rgb(255, 255, 255);</string>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton_2">
+        <widget class="QPushButton" name="ExitButton">
          <property name="styleSheet">
           <string notr="true">background-color: rgb(39, 79, 81);
 border-color: rgb(190, 253, 255);
@@ -147,7 +147,7 @@ color: rgb(255, 255, 255);</string>
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>30</x>
@@ -308,7 +308,7 @@ font: 700 15pt &quot;Ubuntu Condensed&quot;;</string>
        <set>Qt::AlignCenter</set>
       </property>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>60</x>

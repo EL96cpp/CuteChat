@@ -2,6 +2,9 @@
 #define MAIL_SERVICE_H
 
 #include <QObject>
+#include <QRandomGenerator>
+#include <QMessageBox>
+#include <QDebug>
 
 #include "Poco/SharedPtr.h"
 #include "Poco/Net/MailMessage.h"
@@ -29,26 +32,39 @@ using Poco::Net::MailRecipient;
 
 using namespace std;
 
-class mail_service : public QObject
+class MailService : public QObject
 {
     Q_OBJECT
 public:
-    mail_service();
+    MailService();
 
-    void SetServerMail(const QString& mail);
-
-private:
     QString GenerateVerificationCode();
 
-public slots:
-    void TryLogin(const QString& server_mail, const QString& password);
+    void SendVerificationCode(const QString& mail, const QString& verification_code);
+    void SendRegisterSuccessMail(const QString& mail);
+    void SendChangedPasswordMail(const QString& mail);
+    void SendChangeNicknameMail(const QString& mail);
+
     void OnRegisterSuccess(const QString& mail);
-    void SendVerification(const QString& mail, const QString& verification_code);
+
+public slots:
+    void TryLogin(const std::string& server_mail, const std::string& password);
+
 
 signals:
+    void ServerMailLogged();
     void LoginFailed();
     void VerificationFailed();
     void VerificationSuccess();
+
+private:
+    //Poco::SharedPtr<Poco::Net::InvalidCertificateHandler> certificate_handler;
+    //Poco::Net::Context::Ptr context;
+    //Poco::Net::SecureStreamSocket socket;
+    //Poco::Net::SecureSMTPClientSession session;
+    //int port = 465;
+    //std::string host = "smtp.gmail.com";
+    QRandomGenerator* generator;
 };
 
 #endif // MAIL_SERVICE_H
